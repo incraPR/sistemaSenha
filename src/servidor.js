@@ -9,12 +9,13 @@ const app = express();
 const porta = process.env.porta || 3000;
 
 const caminhoAtual = url.fileURLToPath(import.meta.url);
+console.log(caminhoAtual)
 const diretorioPublico = path.join(caminhoAtual, "../..", "public")
 
 app.use(express.static(diretorioPublico));
 
 app.get("/", (req, res) => {
-  res.send("/index.html")
+  res.sendFile("/index.html")
 })
 
 const servidorHttp = http.createServer(app);
