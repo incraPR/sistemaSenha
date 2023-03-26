@@ -10,14 +10,19 @@ const porta = process.env.porta || 3000;
 
 const caminhoAtual = url.fileURLToPath(import.meta.url);
 const diretorioPublico = path.join(caminhoAtual, "../..", "public")
-console.log(diretorioPublico)
+
 app.use(express.static(diretorioPublico));
 
 const servidorHttp = http.createServer(app);
+
+app.get("/", (req, res) => {
+  res.sendFile(diretorioPublico + "/index.html")
+})
 
 servidorHttp.listen(porta, () => 
   console.log(`Servidor escutando na porta ${porta}`))
 
 const io = new Server(servidorHttp);
+
 
 export default io;
