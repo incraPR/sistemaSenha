@@ -28,12 +28,16 @@ document.addEventListener("keydown", (event) => {
       senhaAnterior.innerHTML = senhaAnteriorString ;
       socket.emit("alterarSenha", novaSenhaString, senhaAnteriorString);
     } else if (valorNovaSenha < 100) {
-      senhaAtual.innerHTML = `P0${valorNovaSenha}`;
-      senhaAnterior.innerHTML = `P0${valorAnterior}`;
-      socket.emit("alterarSenha", senhaAtual.innerHTML);
+      novaSenhaString = `P0${valorNovaSenha}`;
+      senhaAtual.innerHTML = novaSenhaString;
+      senhaAnteriorString = `P0${valorAnterior}`
+      senhaAnterior.innerHTML = senhaAnteriorString ;
+      socket.emit("alterarSenha", novaSenhaString, senhaAnteriorString);
     } else {
-      senhaAtual.innerHTML = `P${valorNovaSenha}`;
-      senhaAnterior.innerHTML = `P${valorAnterior}`;
+      novaSenhaString = `P${valorNovaSenha}`;
+      senhaAtual.innerHTML = novaSenhaString;
+      senhaAnteriorString = `P${valorAnterior}`
+      senhaAnterior.innerHTML = senhaAnteriorString ;
       socket.emit("alterarSenha", senhaAtual.innerHTML);
     }
   }
