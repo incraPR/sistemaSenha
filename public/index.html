@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>INCRA/PR - Gerenciador de Senhas</title>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/estilo.css" />
+    <link rel="shortcut icon" href="#">
+  </head>
+  <body>
+    <header class="cabecalho">
+      <img
+        <!--src="./img/Logo_INCRA.svg"
+        alt="Logo da Empresa"-->
+      <!--/>-->
+    </header>
+    <section class="senhas">
+      <div class="senha-Atual">
+        <span class="senha-Atual_Texto">SENHA</span>
+        <div>
+          <span class="senha-Atual_Numero" id="senhaAtual">P000</span>
+        </div>
+      </div>
+      <div class="senha-Anterior">
+        <h3 class="senha-Titulo">ÚLTIMA CHAMADA</h3>
+        <div class="senha-numero-texto">
+          <span class="senha-Anterior_Texto">Senha</span>
+          <span class="senha-Anterior_Numero" id="senhaAnterior">P000</span>
+        </div>
+      </div>
+    </section>
+
+    <audio id="audioChamada" src="./chamada.wav"></audio>
+
+    <script src="./index.js" type="module"></script>
+
+    <script src="/socket.io/socket.io.js"></script>
+  </body>
+</html>
