@@ -13,11 +13,11 @@ const diretorioPublico = path.join(caminhoAtual, "../..", "public")
 
 app.use(express.static(diretorioPublico));
 
-const servidorHttp = http.createServer(app);
-
 app.get("/", (req, res) => {
-  res.sendFile(diretorioPublico + "/index.html")
+  res.send("/index.html")
 })
+
+const servidorHttp = http.createServer(app);
 
 servidorHttp.listen(porta, () => 
   console.log(`Servidor escutando na porta ${porta}`))
