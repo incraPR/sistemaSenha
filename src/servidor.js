@@ -15,7 +15,7 @@ const diretorioPublico = path.join(caminhoAtual, "../..", "public")
 app.use(express.static(diretorioPublico));
 
 app.get("/", (req, res) => {
-  res.sendFile("/index.html")
+  res.sendFile(`${diretorioPublico}/index.html`)
 })
 
 const servidorHttp = http.createServer(app);
