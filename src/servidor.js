@@ -4,7 +4,7 @@ import path from "path";
 import http from "http";
 import { Server } from "socket.io";
 
-
+const hostname = '192.168.0.199';
 const app = express();
 const porta = process.env.porta || 3000;
 
@@ -15,12 +15,13 @@ const diretorioPublico = path.join(caminhoAtual, "../..", "public")
 app.use(express.static(diretorioPublico));
 
 app.get("/", (req, res) => {
+  console.log(req.ip)
   res.sendFile(`${diretorioPublico}/index.html`)
 })
 
 const servidorHttp = http.createServer(app);
 
-servidorHttp.listen(porta, () => 
+servidorHttp.listen(porta, hostname, () => 
   console.log(`Servidor escutando na porta ${porta}`))
 
 const io = new Server(servidorHttp);
