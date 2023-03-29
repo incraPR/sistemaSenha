@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>INCRA/PR - Gerenciador de Senhas</title>
     <link rel="stylesheet" href="./css/reset.css" />
@@ -11,22 +10,24 @@
   </head>
   <body>
     <header class="cabecalho">
-      <img src="./img/Logo_INCRA.svg" alt="Logo da Empresa" />
+      <img
+        src="./img/Logo_INCRA.svg"
+        alt="Logo do Instituto Nacional de Colonização e Regularização Fundiária"
+      />
     </header>
-    <section class="senhas">
-      <div class="senha-Atual">
-        <span class="senha-Atual_Texto">SENHA</span>
-        <div>
-          <span class="senha-Atual_Numero" id="senhaAtual">P000</span>
-        </div>
-      </div>
-      <div class="senha-Anterior">
-        <h3 class="senha-Titulo">ÚLTIMA CHAMADA</h3>
-        <div class="senha-numero-texto">
-          <span class="senha-Anterior_Texto">Senha</span>
-          <span class="senha-Anterior_Numero" id="senhaAnterior">P000</span>
-        </div>
-      </div>
+
+    <section class="senha-atual">
+      <p class="senha-atual_texto">SENHA</p>
+      <p class="senha-atual_numero" id="senhaAtual">P000</p>
+    </section>
+    <section class="senha-anterior">
+      <h3>ÚLTIMA CHAMADA</h3>
+      <span class="senha-anterior_texto">SENHA</span>
+      <span class="senha-anterior_numero" id="senhaAnterior">P000</span>
+    </section>
+    <section class="botoes">
+      <button class="botoes-protocolo botoes-chamada">PROTOCOLO</button>
+      <button class="botoes-cidadania botoes-chamada">CIDADANIA</button>
     </section>
 
     <audio id="audioChamada" src="./chamada.wav"></audio>
