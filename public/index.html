@@ -20,14 +20,29 @@
       <p class="senha-atual_texto">SENHA</p>
       <p class="senha-atual_numero" id="senhaAtual">P000</p>
     </section>
-    <section class="senha-anterior">
-      <h3>ÚLTIMA CHAMADA</h3>
-      <span class="senha-anterior_texto">SENHA</span>
-      <span class="senha-anterior_numero" id="senhaAnterior">P000</span>
-    </section>
+    <div class="senha">
+      <section class="senha-anterior-protocolo senha-anterior">
+        <h3>ÚLTIMA CHAMADA</h3>
+        <span class="senha-anterior_texto">SENHA</span>
+        <span class="senha-anterior_numero" id="senhaAnteriorProtocolo"
+          >P000</span
+        >
+      </section>
+      <section class="senha-anterior-cidadania senha-anterior">
+        <h3>ÚLTIMA CHAMADA</h3>
+        <span class="senha-anterior_texto">SENHA</span>
+        <span class="senha-anterior_numero" id="senhaAnteriorCidadania"
+          >C000</span
+        >
+      </section>
+    </div>
     <section class="botoes">
-      <button class="botoes-protocolo botoes-chamada" id="botao-protocolo">PROTOCOLO</button>
-      <button class="botoes-cidadania botoes-chamada" id="botao-cidadania">CIDADANIA</button>
+      <button class="botoes-protocolo botoes-chamada" id="botao-protocolo">
+        PROTOCOLO
+      </button>
+      <button class="botoes-cidadania botoes-chamada" id="botao-cidadania">
+        CIDADANIA
+      </button>
     </section>
 
     <audio id="audioChamada" src="./chamada.wav"></audio>

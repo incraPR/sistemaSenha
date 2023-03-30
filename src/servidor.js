@@ -6,9 +6,7 @@ import { Server } from "socket.io";
 import os from "os";
 
 const networkingInfo = os.networkInterfaces();
-const hostname = networkingInfo.en0[3].address
-
-console.log(hostname)
+// const hostname = networkingInfo.en0[2].address
 
 const app = express();
 const porta = process.env.porta || 3000;
@@ -26,7 +24,7 @@ app.get("/", (req, res) => {
 
 const servidorHttp = http.createServer(app);
 
-servidorHttp.listen(porta, hostname, () => 
+servidorHttp.listen(porta, () => 
   console.log(`Servidor escutando na porta ${porta}`))
 
 const io = new Server(servidorHttp);

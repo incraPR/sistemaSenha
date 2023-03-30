@@ -1,77 +1,101 @@
 const socket = io();
 
 const senhaAtual = document.querySelector("#senhaAtual");
-const senhaAnterior = document.querySelector("#senhaAnterior");
+const senhaAnteriorProtocolo = document.querySelector('#senhaAnteriorProtocolo');
+const senhaAnteriorCidadania = document.querySelector('#senhaAnteriorCidadania');
 const somChamada = document.querySelector("#audioChamada");
 
+var valorSenhaAnteriorProtocolo = 0;
+var valorSenhaAnteriorCidadania = 0;
 
 
-var valorSenhaProtocolo = 0;
-var valorNovaSenhaProtocolo = 0;
-var valorAnteriorProtocolo = "";
-var novaSenhaStringProtocolo = "";
-var senhaAnteriorStringProtocolo = "";
-
-var valorSenhaCidadania = 0;
-var valorNovaSenhaCidadania = 0;
-
-var valorAnteriorCidadania = "";
-var novaSenhaStringCidadania = "";
-var senhaAnteriorStringCidadania = "";
-
-localStorage.setItem("senhaProtocolo", valorSenhaProtocolo)
-localStorage.setItem("senhaCidadania", valorSenhaCidadania)
 
 document.addEventListener("keydown", (event) => {
   
   if (event.key === "p" || event.key === "P") {
-
-    valorAnteriorProtocolo = localStorage.getItem("senhaProtocolo");
-    valorNovaSenhaProtocolo = parseInt(valorAnteriorProtocolo) + 1;
-    localStorage.setItem("senhaProtocolo", valorNovaSenhaProtocolo)
-    trocarSenha(event.key.toUpperCase(), valorNovaSenhaProtocolo, valorAnteriorProtocolo)
+    
+    valorSenhaAnteriorProtocolo = parseInt(senhaAnteriorProtocolo.innerHTML.slice(1))
+    
+    
+    trocarSenha(event.key.toUpperCase(), valorSenhaAnteriorProtocolo)
     
   } else if (event.key === "c" || event.key === "C"){
-    valorAnteriorCidadania = localStorage.getItem("senhaCidadania");
-    valorNovaSenhaCidadania = parseInt(valorAnteriorCidadania) + 1;
-    localStorage.setItem("senhaCidadania", valorNovaSenhaCidadania);
-    trocarSenha(event.key.toUpperCase(), valorNovaSenhaCidadania, valorAnteriorCidadania);
+  
+    valorSenhaAnteriorCidadania = parseInt(senhaAnteriorCidadania.innerHTML.slice(1))
+    valorSenha = valorSenhaAnteriorCidadania + 1
+    
+    trocarSenha(event.key.toUpperCase(), valorSenha, valorSenhaAnteriorCidadania)
   }
 });
 
-  socket.on("alteraSenhaCliente", (novaSenha, Anterior) => {
+  socket.on("alteraSenhaClienteProtocolo", (novaSenha, Anterior) => {
     senhaAtual.innerHTML = novaSenha;
     senhaAnterior.innerHTML = Anterior;
+    somChamada.play();
 })
 
-function trocarSenha(tipoAtendimento, senhaNova, ultimaSenha){
-    var novaSenhaString = " ";
-    var senhaAnteriorString = "";
-    var novaSenha = 0;
-    var novaSenha = senhaNova;
-    var anteriorSenha = ultimaSenha;
-    
+function trocarSenha(tipoAtendimento, ultimaSenha){
+    var senhaNova = ultimaSenha + 1;
+    console.log(senhaNova)
+    var nomeEmit = "";
+
+    if (tipoAtendimento === "P"){
+      nomeEmit = "alteraSenhaClienteProtocolo"
+      
+      
+    } else if (tipoAtendimento === "C"){
+
+      nomeEmit = "alteraSenhaClienteCidadania"
+      
+    }
 
     somChamada.play();
 
-    if (novaSenha < 10) {
-      novaSenhaString = `${tipoAtendimento}00${novaSenha}`;
-      senhaAtual.innerHTML = novaSenhaString;
-      senhaAnteriorString = `${tipoAtendimento}00${anteriorSenha}`
-      senhaAnterior.innerHTML = senhaAnteriorString ;
-      socket.emit("alterarSenha", novaSenhaString, senhaAnteriorString);
-    } else if (novaSenha < 100) {
-      novaSenhaString = `${tipoAtendimento}0${valorNovaSenha}`;
-      senhaAtual.innerHTML = novaSenhaString;
-      senhaAnteriorString = `${tipoAtendimento}0${anteriorSenha}`
-      senhaAnterior.innerHTML = senhaAnteriorString ;
-      socket.emit("alterarSenha", novaSenhaString, senhaAnteriorString);
+    if (senhaNova < 10) {
+
+      senhaAtual.innerHTML = `${tipoAtendimento}00${senhaNova}`;
+      if (tipoAtendimento === "P"){
+        nomeEmit = "alteraSenhaClienteProtocolo"
+        senhaAnteriorProtocolo.innerHTML = `${tipoAtendimento}00${ultimaSenha}`;
+        
+      } else if (tipoAtendimento === "C"){
+        senhaAnteriorCidadania.innerHTML = `${tipoAtendimento}00${ultimaSenha}`;
+        nomeEmit = "alteraSenhaClienteCidadania"
+        
+      }
+    
+      socket.emit(nomeEmit, senhaAtual.innerHTML, senhaAnteriorProtocolo.innerHTML);
+
+    } else if (senhaNova < 100) {
+
+      senhaAtual.innerHTML = `${tipoAtendimento}0${senhaNova}`;
+
+      if (tipoAtendimento === "P"){
+        nomeEmit = "alteraSenhaClienteProtocolo"
+        senhaAnteriorProtocolo.innerHTML = `${tipoAtendimento}0${ultimaSenha}`;
+        
+        console.log(nomeEmit)
+      } else if (tipoAtendimento === "C"){
+        senhaAnteriorCidadania.innerHTML = `${tipoAtendimento}0${ultimaSenha}`;
+        nomeEmit = "alteraSenhaClienteCidadania"
+        
+      }
+    
+      socket.emit(nomeEmit, senhaAtual.innerHTML, senhaAnteriorProtocolo.innerHTML);
     } else {
-      novaSenhaString = `${tipoAtendimento}${valorNovaSenha}`;
-      senhaAtual.innerHTML = novaSenhaString;
-      senhaAnteriorString = `${tipoAtendimento}${novaSenha}`
-      senhaAnterior.innerHTML = senhaAnteriorString ;
-      socket.emit("alterarSenha", senhaAtual.innerHTML);
+      senhaAtual.innerHTML = `${tipoAtendimento}${senhaNova}`;
+      if (tipoAtendimento === "P"){
+        nomeEmit = "alteraSenhaClienteProtocolo"
+        senhaAnteriorProtocolo.innerHTML = `${tipoAtendimento}${ultimaSenha}`;
+        
+        console.log(nomeEmit)
+      } else if (tipoAtendimento === "C"){
+        senhaAnteriorCidadania.innerHTML = `${tipoAtendimento}${ultimaSenha}`;
+        nomeEmit = "alteraSenhaClienteCidadania"
+        
+      }
+    
+      socket.emit(nomeEmit, senhaAtual.innerHTML, senhaAnteriorProtocolo.innerHTML);
     }
   }
 
