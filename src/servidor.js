@@ -4,7 +4,7 @@ import path from "path";
 import http from "http";
 import { Server } from "socket.io";
 
-const hostname = '192.168.0.199';
+const hostname = '192.168.0.184';
 const app = express();
 const porta = process.env.porta || 3000;
 
