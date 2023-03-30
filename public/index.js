@@ -52,7 +52,7 @@ function trocarSenha(tipoAtendimento, senhaNova, ultimaSenha){
     var anteriorSenha = ultimaSenha;
     
 
-    // somChamada.play();
+    somChamada.play();
 
     if (novaSenha < 10) {
       novaSenhaString = `${tipoAtendimento}00${novaSenha}`;
@@ -87,6 +87,7 @@ function trocarSenha(tipoAtendimento, senhaNova, ultimaSenha){
   })
 
   function alterarSenhaBotao(tipoAtendimento){
+    
     if (tipoAtendimento === "Protocolo"){
     valorAnteriorProtocolo = localStorage.getItem("senhaProtocolo");
     valorNovaSenhaProtocolo = parseInt(valorAnteriorProtocolo) + 1;
@@ -98,4 +99,8 @@ function trocarSenha(tipoAtendimento, senhaNova, ultimaSenha){
     localStorage.setItem("senhaCidadania", valorNovaSenhaCidadania);
     trocarSenha("C", valorNovaSenhaCidadania, valorAnteriorCidadania);
   }
+    socket.on("alteraSenhaCliente", (novaSenha, Anterior) => {
+    senhaAtual.innerHTML = novaSenha;
+    senhaAnterior.innerHTML = Anterior;
+})
   }

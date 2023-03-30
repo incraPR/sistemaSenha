@@ -3,13 +3,18 @@ import url from "url";
 import path from "path";
 import http from "http";
 import { Server } from "socket.io";
+import os from "os";
 
-const hostname = '192.168.0.184';
+const networkingInfo = os.networkInterfaces();
+const hostname = networkingInfo.en0[3].address
+
+console.log(hostname)
+
 const app = express();
 const porta = process.env.porta || 3000;
 
 const caminhoAtual = url.fileURLToPath(import.meta.url);
-console.log(caminhoAtual)
+
 const diretorioPublico = path.join(caminhoAtual, "../..", "public")
 
 app.use(express.static(diretorioPublico));
