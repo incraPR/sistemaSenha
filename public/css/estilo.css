@@ -79,7 +79,7 @@
     margin-right: 0.5em;
   }
   .senha-anterior{
-    margin-left: 45px;
+    margin-left: 50px;
     width: 40%;
     padding: 20px;
     font-size: 40px;
@@ -96,4 +96,10 @@
   .senha-anterior_numero{
     font-size: 200px;
   }
+  .senha-atual_numero{
+    font-size: 300px;    
+}
+  .senha{
+  margin-left: 48px;
+}
 }

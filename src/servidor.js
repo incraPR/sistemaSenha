@@ -6,7 +6,9 @@ import { Server } from "socket.io";
 import os from "os";
 
 const networkingInfo = os.networkInterfaces();
-// const hostname = networkingInfo.en0[2].address
+const hostname = "192.168.0.199"
+
+console.log(hostname)
 
 const app = express();
 const porta = process.env.porta || 3000;
